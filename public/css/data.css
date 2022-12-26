@@ -1,0 +1,21 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+
+ header {
+    padding: 20px;
+    background-color: gold;
+    color: black;
+ }
+
+ #content {
+    max-width: 1440px;
+    margin: 0 auto;
+ }
+
+ #content .data-book {
+    display: flex;
+    margin-top: 20px;
+ }

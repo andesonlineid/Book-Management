@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+main {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+#content {
+   display: flex;
+   margin-top: 20px;
+}
+
+#content .left-content figure img {
+    border-radius: 30px;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+#content .left-content figure {
+    margin-bottom: 15px;
+}
+
+#content .right-content form > div {
+    margin-top: 20px;
+}
+
+#content .right-content form a {
+    text-decoration: none;
+    color:black;
+}
+#content .right-content form a:hover {
+    color: red;
+    cursor: pointer;
+}
+
+
+/* Css class */
+
+#content .left-content,.right-content {
+    flex-basis: 50%;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+#content .left-content {
+    text-align: center;
+    flex-direction: column;
+    
+}
+
+#content .right-content {
+  
+    border-radius: 20px;
+    text-align: center;
+    flex-direction: column;
+}
+
+.form-input {
+    padding: 10px;
+    width: 100%;
+    font-size: 1.2em;
+    border-radius: 10px;
+}
+
+
+.btn-cta {
+    padding: 10px;
+    font-size: 1.2em;
+    text-align: center;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: rgb(41, 201, 41);
+    margin-top: 10px;
+    border-radius: 25px;
+}
+.btn-cta:hover {
+    background-color: rgb(0, 137, 0);
+}
+
+
+/* Responsive Breakpoint */
+@media screen and (max-width: 1000px) {
+#content {
+    flex-direction: column;
+    padding: 10px;
+}
+
+#content .left-content h1 {
+    font-size: 1.2em;
+}
+
+#content .right-content {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+}
+
+@media screen and (max-width: 700px) {
+    #content .left-content h1 {
+        font-size: 1.1em;
+    }
+}
