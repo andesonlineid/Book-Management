@@ -1,7 +1,13 @@
- * {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+ }
+
+ body {
+   font-family: 'Montserrat', sans-serif;
  }
 
  header {
@@ -10,12 +16,78 @@
     color: black;
  }
 
+
  #content {
-    max-width: 1440px;
+    max-width: 800px;
     margin: 0 auto;
+   margin-bottom: 20px;
+ }
+ #content .book-limit {
+   padding: 20px;
  }
 
- #content .data-book {
+ main #content .data-book {
     display: flex;
     margin-top: 20px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
  }
+
+
+
+ main #content .data-book .left-content,.right-content {
+   flex-basis: 50%;
+ }
+
+
+ #content .data-book .left-content figure img {
+   object-fit: cover;
+   object-position: center;
+   width: 300px;
+   border-radius: 30px;
+ }
+
+ main #content .data-book .right-content ul li {
+   list-style-type: none;
+   font-size: 1.2em;
+   margin-top: 10px;
+ }
+
+ .btn-cta {
+   border-radius: 10px;
+   padding: 10px;
+   border: none;
+   font-size: 1.2em;
+   background-color: rgb(233, 66, 66);
+   color: white;
+   text-align: center;
+   cursor: pointer;
+   transition: all 0.5ms;
+ }
+ .btn-cta:hover {
+   background-color: rgb(168, 31, 31);
+ }
+
+ #content .book-limit .data-book .left-content .container-btn-cta {
+   display: flex;
+   margin-top: 10px;
+   text-align: center;
+ }
+
+ #content .book-limit .data-book .left-content .container-btn-cta .btn-cta {
+   margin-right: 20px;
+ }
+ #content .book-limit .data-book .left-content .container-btn-cta .btn-update {
+   color: black;
+   background-color: gold;
+ }
+
+ #content .book-limit .data-book .left-content .container-btn-cta .btn-delete {
+   color: white;
+   background-color: green;
+ }
+
+ 
