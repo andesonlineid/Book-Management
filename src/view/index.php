@@ -3,8 +3,8 @@
     require("../controller/functions.php");
     
     $books = QueryData("SELECT * FROM books");
-   
-// Connect to DBMS
+
+    // Connect to DBMS
     // $servername = "localhost";
     // $username = "root";
     // $password = '';
@@ -26,8 +26,6 @@
     
     // fetch data from table
     // $books = mysqli_fetch_assoc($result); // return array
-        
-                
         
 ?>
 
@@ -63,12 +61,14 @@
                             <div class="container-btn-cta">
                            
                             <div class>
-                            <button type="submit" class="btn-cta btn-update">update data</button>
+                            <button type="submit" class="btn-cta btn-update" name="update">update data</button>
                             </div>
 
                             <div>
-                            <button type="submit" class="btn-cta btn-delete">delete data</button>
-                            </div>
+                                <a href="../model/delete.php?ID=<?= $book["ID"] ?>" onclick="return confirm('Are u sure to delete this??')">
+                            <button type="submit" class="btn-cta btn-delete" name="delete">delete data</button>
+                            </a>    
+                        </div>
 
 
 
@@ -105,7 +105,9 @@
         </div>
 
         <div>
+            <a href="../model/add.php">
             <button type="submit" class="btn-cta">add data</button>
+            </a>
         </div>
 
         </div>
