@@ -49,7 +49,8 @@
     <main>
         <div id="content">
 
-    <div class="book-limit">
+    <section class="book-limit">
+        
     <?php $i=1; ?>
     <?php foreach($books as $book) :?>
                 <section class="data-book">
@@ -57,22 +58,8 @@
                     <div class="left-content">
                             <figure>
                                 <img src="../../public/img/<?= $book["BookImage"] ?>" alt="<?= $book["BookTitle"] ?>">
-                            </figure>
-                            <div class="container-btn-cta">
-                           
-                            <div class>
-                            <button type="submit" class="btn-cta btn-update" name="update">update data</button>
-                            </div>
+                            </figure>   
 
-                            <div>
-                                <a href="../model/delete.php?ID=<?= $book["ID"] ?>" onclick="return confirm('Are u sure to delete this??')">
-                            <button type="submit" class="btn-cta btn-delete" name="delete">delete data</button>
-                            </a>    
-                        </div>
-
-
-
-                            </div>
                     </div>
 
                     <div class="right-content">
@@ -96,19 +83,31 @@
                                 <li>
                                     Isbn: <?= $book["BookIsbn"] ?>
                                 </li>
+                                <li>
+                                    <a href="../model/update.php?ID=<?= $book["ID"] ?>">
+                                    <button class="btn-cta btn-update"> Update </button>
+                                    </a>
+                                    <a href="../model/delete.php?ID=<?= $book["ID"] ?>">
+                                    <button class="btn-cta btn-delete"> delete </button>
+                                    </a>
+                                </li>
                             </ul>
                     </div>
+                
 
                 </section>
 
         <?php endforeach; ?>
-        </div>
+        
+        <button type="submit" class="btn-cta btn-add-data">
+            add data
+         </button>   
+        
+    </section>
 
-        <div>
-            <a href="../model/add.php">
-            <button type="submit" class="btn-cta">add data</button>
-            </a>
-        </div>
+     
+       
+     
 
         </div>
     </main>

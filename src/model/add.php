@@ -28,15 +28,13 @@
 </head>
 <body>
     <header class="main-header">
-        <h1>Desainer Gratis</h1>
+        <h1><a href="../view/index.php"> Desainer Gratis </a></h1>
     </header>
 
     <main>
         <div id="content">
 
         <section class="add-data">
-                  
-                    <div class="add-form">
 
                     <header>
                         <h1>Add Data</h1>
@@ -44,31 +42,34 @@
 
 
                         <form action="" method="POST">
-                            <div>
+                            <ul>
+                                <li>
                                 <input type="text" class="input-form" name="book-title" placeholder="Input book title" required>
-                            </div>
-                            <div>
-                                <input type="text" class="input-form" name="book-author" placeholder="Input book author" required>
-                            </div>
-                            <div>
-                                <input type="text" class="input-form" name="book-publisher" placeholder="Input book publisher" required>
-                            </div>
-                            <div>
-                                <input type="text" class="input-form" name="book-price" placeholder="Input book price" required>
-                            </div>
+                                </li>
                             
-                            <div>
+                                <li>
+                                <input type="text" class="input-form" name="book-author" placeholder="Input book author" required>
+                                </li>
+                            
+                                <li>
+                                <input type="text" class="input-form" name="book-publisher" placeholder="Input book publisher" required>
+                                </li>
+                            
+                                <li>
+                                <input type="text" class="input-form" name="book-price" placeholder="Input book price" required>
+                                </li>
+                            
+                                <li>
                                 <input type="file" class="input-form" name="book-image" placeholder="Input book image" required>
-                            </div>
-
-                            <div>
+                                </li>
+                      
+                                <li>
                                 <input type="text" class="input-form" name="book-isbn" placeholder="Input book isbn" required>
-                            </div>
-                            <div>
+                                </li>
+                            </ul>
                                 <button name="btn-add-data" class="btn-add-data btn-cta">add data</button>
-                            </div>
                         </form>
-                    </div>
+               
         </section>
 
         </div>

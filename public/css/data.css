@@ -22,6 +22,9 @@
     margin: 0 auto;
    margin-bottom: 20px;
  }
+
+ /* css class */
+ 
  #content .book-limit {
    padding: 20px;
  }
@@ -35,8 +38,6 @@
     justify-content: center;
     align-items: center;
  }
-
-
 
  main #content .data-book .left-content,.right-content {
    flex-basis: 50%;
@@ -57,37 +58,40 @@
  }
 
  .btn-cta {
-   border-radius: 10px;
    padding: 10px;
    border: none;
    font-size: 1.2em;
-   background-color: rgb(233, 66, 66);
-   color: white;
-   text-align: center;
    cursor: pointer;
-   transition: all 0.5ms;
+   border-radius: 5px;
  }
+
  .btn-cta:hover {
-   background-color: rgb(168, 31, 31);
+   font-weight: 700;
  }
 
- #content .book-limit .data-book .left-content .container-btn-cta {
-   display: flex;
-   margin-top: 10px;
-   text-align: center;
- }
-
- #content .book-limit .data-book .left-content .container-btn-cta .btn-cta {
-   margin-right: 20px;
- }
- #content .book-limit .data-book .left-content .container-btn-cta .btn-update {
+ #content .book-limit .data-book .right-content  .btn-update {
    color: black;
    background-color: gold;
+  margin-right: 20px;
  }
 
- #content .book-limit .data-book .left-content .container-btn-cta .btn-delete {
+ #content .book-limit .data-book .right-content .btn-delete {
    color: white;
    background-color: green;
+   
+ }
+
+ #content .book-limit .btn-add-data {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+  background-color: rgb(198, 23, 23);
+  color: white;
+  font-weight: bold;
  }
 
  

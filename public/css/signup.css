@@ -19,6 +19,7 @@ main {
 #content {
    display: flex;
    margin-top: 20px;
+  
 }
 
 #content .left-content figure img {
@@ -84,7 +85,7 @@ main {
     cursor: pointer;
     background-color: rgb(41, 201, 41);
     margin-top: 10px;
-    border-radius: 25px;
+    width: 100%;
 }
 .btn-cta:hover {
     background-color: rgb(0, 137, 0);

@@ -1,6 +1,7 @@
 <?php
 // Connection to database
 $conn = mysqli_connect("localhost","root","","bookmanagement");
+
    // Show data from table
     function QueryData($sqlQuery) {
         global $conn;
@@ -27,7 +28,9 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
             $bookIsbn = htmlspecialchars($data["book-isbn"]);                   
 
             $sqlInsert = "INSERT INTO books VALUES (
-                '', '$bookTitle', '$bookAuthor', '$bookPublisher', '$bookPrice', '$bookImage' , '$bookIsbn') 
+                '', '$bookTitle', '$bookAuthor', '$bookPublisher', 
+                '$bookPrice', '$bookImage' , '$bookIsbn'
+                ) 
                 ";
             // Insert data to DBMS
             mysqli_query($conn,$sqlInsert);
@@ -37,10 +40,36 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
     }
 
     function DeleteData($id) {
+
         global $conn;
         $sqlDelete = "DELETE FROM books WHERE ID = '$id'";
         mysqli_query($conn, $sqlDelete);
         return mysqli_affected_rows($conn);
+
+    }
+
+
+    function UpdateData($newData,$id) {
+        global $conn;
+        // $id = $newData["book-id"];
+        $bookTitle = htmlspecialchars($newData["book-title"]);
+        $bookAuthor = htmlspecialchars($newData["book-author"]);
+        $bookPublisher = htmlspecialchars($newData["book-publisher"]);
+        $bookPrice = htmlspecialchars($newData["book-price"]);
+        $bookImage = htmlspecialchars($newData["book-image"]);
+        $bookIsbn = htmlspecialchars($newData["book-isbn"]);
+
+  
+
+        $sqlUpdate = "UPDATE books SET BookTitle = '$bookTitle', BookAuthor= '$bookAuthor',
+        BookPublisher = '$bookPublisher', BookPrice= '$bookPrice', BookImage = '$bookImage',
+        BookIsbn = '$bookIsbn' 
+        WHERE ID = $id ";
+
+        mysqli_query($conn,$sqlUpdate);
+
+        return mysqli_affected_rows($conn);
+    
     }
 
 ?>
