@@ -2,7 +2,7 @@
 // Import another php file 
     require("../controller/functions.php");
     
-    $books = QueryData("SELECT * FROM books");
+    $books = QueryData("SELECT * FROM books ORDER BY ID DESC");
 
     // Connect to DBMS
     // $servername = "localhost";
@@ -26,7 +26,15 @@
     
     // fetch data from table
     // $books = mysqli_fetch_assoc($result); // return array
-        
+    
+        if(isset($_POST["btn-search"]) ){
+            $data = $_POST["search-form"];
+            $books = Search($data);
+           
+          
+        }
+
+         
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +58,13 @@
         <div id="content">
 
     <section class="book-limit">
-        
+        <form action="" method="POST">
+   
+        <input type="text" name="search-form" class="form-input" autofocus autocomplete="off" placeholder="Looking for something??"> 
+      
+        <button type="submit" name="btn-search" class="btn-cta btn-search">search</button>
+          
+    </form>
     <?php $i=1; ?>
     <?php foreach($books as $book) :?>
                 <section class="data-book">
@@ -98,10 +112,11 @@
                 </section>
 
         <?php endforeach; ?>
-        
+        <a href="../model/add.php">
         <button type="submit" class="btn-cta btn-add-data">
             add data
-         </button>   
+         </button> 
+         </a>  
         
     </section>
 

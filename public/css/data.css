@@ -81,6 +81,12 @@
    
  }
 
+ main #content .book-limit .btn-search {
+  color: white;
+  font-weight: 700;
+  background-color: rgb(5, 83, 5);
+ }
+
  #content .book-limit .btn-add-data {
   width: 100%;
   padding: 10px;
@@ -95,3 +101,8 @@
  }
 
  
+#content .book-limit .form-input {
+  padding: 10px;
+  font-size: 1.2em;
+  width: 88.5%;
+}

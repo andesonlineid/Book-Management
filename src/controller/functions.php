@@ -72,4 +72,14 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
     
     }
 
+    function Search($keyword){
+      
+        $query = "SELECT * FROM books WHERE BookTitle LIKE '%$keyword%'
+        OR BookAuthor LIKE '%$keyword%' OR BookPublisher LIKE '%$keyword%'
+        OR BookIsbn LIKE '%$keyword%'";
+
+        return QueryData($query);
+
+    }
+
 ?>
