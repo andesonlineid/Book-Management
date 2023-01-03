@@ -3,17 +3,10 @@
 require('../controller/functions.php');
 
 if(isset($_POST['btn-login'])) {
-        if(Login($_POST) > 0) {
+        if(!Login($_POST)) {
             echo "
             <script>
-                        alert('Login successfully !!');
-                        location.href = 'index.php';
-            </script>
-            ";
-        } else {
-            echo "
-            <script>
-                        alert('Signup fail !!');
+                        alert('Login fail !!');
             </script>
             ";
         }
@@ -57,7 +50,7 @@ if(isset($_POST['btn-login'])) {
               
 
         
-                    <form action="" method="post"> 
+                    <form action="" method="POST"> 
                         
                             <ul>
                                 <li>
@@ -72,14 +65,16 @@ if(isset($_POST['btn-login'])) {
                                     <input type="checkbox" name="remember" id="remember"> <label for="remember">remember me</label>
                                 </li>                           
                             </ul>
+
+                            <div class="btn-container">
+                            
+                            <button type="submit" class="btn-cta btn-login" name="btn-login">Log in</button>
+                            
+                        </div>
             
                     </form>
                     
-                    <div class="btn-container">
-                            
-                        <button type="submit" class="btn-cta btn-login" name="btn-login">Log in</button>
-                        
-                    </div>
+                   
    
             </section>
 

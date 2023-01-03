@@ -157,6 +157,7 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
         $resultEmailDatabase = mysqli_query($conn,"SELECT Email FROM user WHERE Email = '$userEmail'");
         $resultUsernameDatabase = mysqli_query($conn,"SELECT Username FROM user WHERE Username = '$userName'");
         
+
         if(mysqli_fetch_assoc($resultEmailDatabase)) {
             echo "
             <script>
@@ -188,8 +189,6 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
             
         } 
 
-
-
         $hashPassword = password_hash($userPassword,PASSWORD_BCRYPT);
         
         $insertUserData = "INSERT INTO user VALUES (
@@ -201,8 +200,26 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
    
     }
 
+
     function Login($userData) {
-        $databaseUsername = "SELECT Username FROM user WHERE Username ";
+        global $conn;
+        $usernameLogin = $userData["username"];
+        $passwordLogin = $userData["password"];
+       
+        $resultUsername = mysqli_query($conn,"SELECT * FROM user
+         WHERE Username = '$usernameLogin'");
+
+        if(mysqli_num_rows($resultUsername) === 1) {
+            $data = mysqli_fetch_assoc($resultUsername);
+            if(password_verify($passwordLogin,$data['Password'])) {
+              header("Location: ../view/index.php");
+              exit;
+            }
+      
+        }  
+
+
+
     }
 
 ?>
