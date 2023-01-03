@@ -2,7 +2,7 @@
             require("../controller/functions.php");
 
                 if( isset($_POST["btn-add-data"]) ) {
-
+                      
                 //  pass by array value
                     if(addDataFunct($_POST) > 0) {
                         // Using javascript to redirect webpage to another
@@ -41,7 +41,7 @@
                     </header>
 
 
-                        <form action="" method="POST">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <ul>
                                 <li>
                                 <input type="text" class="input-form" name="book-title" placeholder="Input book title" required>
@@ -60,7 +60,7 @@
                                 </li>
                             
                                 <li>
-                                <input type="file" class="input-form" name="book-image" placeholder="Input book image" required>
+                                <input type="file" class="input-form" name="file-upload" placeholder="Input book image" >
                                 </li>
                       
                                 <li>

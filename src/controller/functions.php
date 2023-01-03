@@ -24,8 +24,14 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
             $bookAuthor = htmlspecialchars($data["book-author"]);
             $bookPublisher = htmlspecialchars($data["book-publisher"]);
             $bookPrice = htmlspecialchars($data["book-price"]);
-            $bookImage = htmlspecialchars($data["book-image"]);
-            $bookIsbn = htmlspecialchars($data["book-isbn"]);                   
+           
+            $bookIsbn = htmlspecialchars($data["book-isbn"]);  
+            $bookImage = Upload();   
+
+            if(!$bookImage) {
+                return false;
+                
+            }              
 
             $sqlInsert = "INSERT INTO books VALUES (
                 '', '$bookTitle', '$bookAuthor', '$bookPublisher', 
@@ -37,6 +43,57 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
 
             return (mysqli_affected_rows($conn));
             
+    }
+
+    function Upload() {
+
+        $imageName = $_FILES["file-upload"]["name"];
+        $imageSize = $_FILES["file-upload"]["size"];
+        $imageTmp = $_FILES["file-upload"]["tmp_name"];
+        $error = $_FILES["file-upload"]["error"];
+
+        // if user not upload image
+        if($error === 4) {
+            echo "<script> 
+                    alert('File cannot be empty !!!');
+            </script>";
+            return false;
+        }
+
+        // If extension file uploaded = JPG, JPEG, PNG
+        $imageValidExtention = ['jpg','jpeg','png'];
+        $imageExtention = explode('.',$imageName); // return array
+        // get last index in array and changes to lower 
+        $imageExtention = strtolower(end($imageExtention));
+
+        // if extention that user upload same to our extention rules
+        if( !in_array($imageExtention,$imageValidExtention) ) {
+            echo "<script> 
+            alert('Your extention is not valid !!!');
+            </script>";
+            return false;
+        }
+
+        // check file size using bytes unit
+
+        if($imageSize > 1000000) {
+                echo "<script>
+                alert('Your image size too large');
+                </script>";
+                return false;
+        }
+
+        // if all requirements qualified then upload file
+        // Generate new image name to avoid same image name
+        $generateNewImageName = uniqid();
+        $generateNewImageName.= '.';
+        $generateNewImageName.= $imageExtention;
+     
+        // move from tmp file to our directory
+        // tujuannya relatif terhadap organisasi kita
+        move_uploaded_file($imageTmp,'../../public/img/' . $generateNewImageName);
+        return $generateNewImageName;
+
     }
 
     function DeleteData($id) {
@@ -56,10 +113,15 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
         $bookAuthor = htmlspecialchars($newData["book-author"]);
         $bookPublisher = htmlspecialchars($newData["book-publisher"]);
         $bookPrice = htmlspecialchars($newData["book-price"]);
-        $bookImage = htmlspecialchars($newData["book-image"]);
+        $oldImage =  htmlspecialchars($newData["old-image"]);
         $bookIsbn = htmlspecialchars($newData["book-isbn"]);
 
-  
+        // If users not upload new image
+       if ($_FILES["file-upload"]["error"] === 4) {
+            $bookImage = $oldImage;
+       } else {
+        $bookImage = Upload();
+       }
 
         $sqlUpdate = "UPDATE books SET BookTitle = '$bookTitle', BookAuthor= '$bookAuthor',
         BookPublisher = '$bookPublisher', BookPrice= '$bookPrice', BookImage = '$bookImage',

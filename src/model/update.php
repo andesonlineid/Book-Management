@@ -46,13 +46,17 @@
                        
 
                         <section class="update-content">
-                            <form action="" method="POST">
+                            <form action="" method="POST" enctype="multipart/form-data">
 
                             <ul>
 
                             <!-- <li>
                                 <input type="hidden" name="book-id" value="<?= $query["ID"] ?>" class="form-input">
                             </li> -->
+
+                            <li>
+                                <input type="hidden" name="old-image" value="<?= $query["BookImage"] ?>">
+                            </li>
 
                                 <li>
                                     <input type="text" name="book-title" value="<?=$query["BookTitle"] ?>" class="form-input" place0holder="Input book title">
@@ -69,7 +73,8 @@
                                     <input type="text" name="book-price" value="<?=$query["BookPrice"] ?>" class="form-input" placeholder="">
                                 </li>
                                 <li>
-                                    <input type="file" name="book-image" value="<?=$query["BookImage"] ?>" class="form-input" placeholder="">
+                                    <img src="../../public/img/<?= $query["BookImage"] ?>" alt="<?=$query["BookImage"] ?>">
+                                    <input type="file" name="file-upload" class="form-input">
                                 </li>
                                 <li>
                                     <input type="text" name="book-isbn" value="<?=$query["BookIsbn"] ?>" class="form-input" placeholder="">
