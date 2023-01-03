@@ -144,4 +144,65 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
 
     }
 
+
+
+    function Signup($datauser){
+        global $conn;
+
+        $userEmail = stripslashes(strtolower($datauser["email"]));
+        $userName = stripslashes(strtolower($datauser["username"]));
+        $userPassword = mysqli_real_escape_string($conn, $datauser["password"]);
+        $userConfirmPassword = mysqli_real_escape_string($conn, $datauser["confirm-password"]);
+
+        $resultEmailDatabase = mysqli_query($conn,"SELECT Email FROM user WHERE Email = '$userEmail'");
+        $resultUsernameDatabase = mysqli_query($conn,"SELECT Username FROM user WHERE Username = '$userName'");
+        
+        if(mysqli_fetch_assoc($resultEmailDatabase)) {
+            echo "
+            <script>
+            alert('Email already exist !!!');
+            </script>
+            ";
+            return false;
+        }
+
+
+        if(mysqli_fetch_assoc($resultUsernameDatabase)) {
+            echo "
+            <script>
+            alert('Username already exist !!!');
+            </script>
+            ";
+            return false;
+        }
+
+   
+        if($userPassword !== $userConfirmPassword) {
+
+            echo "
+            <script>
+            alert('Wrong password confirmation !!!');
+            </script>
+            ";
+            return false;
+            
+        } 
+
+
+
+        $hashPassword = password_hash($userPassword,PASSWORD_BCRYPT);
+        
+        $insertUserData = "INSERT INTO user VALUES (
+            '','$userEmail','$userName','$hashPassword'
+            )";
+
+        mysqli_query($conn, $insertUserData);
+        return mysqli_affected_rows($conn);
+   
+    }
+
+    function Login($userData) {
+        $databaseUsername = "SELECT Username FROM user WHERE Username ";
+    }
+
 ?>

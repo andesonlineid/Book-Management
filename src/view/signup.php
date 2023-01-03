@@ -1,7 +1,28 @@
 <?php
+
+    require("../controller/functions.php");
+
     $deadlineTime = mktime(17,00,00,12,30,2022);
 
-?>
+        if( isset($_POST["btn-signup"])) {
+                if(Signup($_POST) > 0) {
+                    echo "
+                    <script>
+                                alert('Signup successfully !!');
+                                location.href = 'login.php';
+                    </script>
+                    ";
+                } else {
+                    echo "
+                    <script>
+                                alert('Signup fail !!');
+                    </script>
+                    ";
+                }
+        }
+ 
+
+?>  
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +60,7 @@
                 <header>
                 <h1>Sign up</h1>
                 </header>
-                <form action="">
+                <form action="" method="POST">
                     <div>
                     <input type="text" name="email" placeholder="Input your email" class="form-input" required>
                     </div>
@@ -50,6 +71,10 @@
 
                     <div>
                     <input type="password" name="password" placeholder="Input your password" class="form-input" required>
+                    </div>
+
+                    <div>
+                    <input type="password" name="confirm-password" placeholder="password confirmation" class="form-input" required>
                     </div>
 
                     <div>

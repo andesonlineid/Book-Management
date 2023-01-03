@@ -1,3 +1,26 @@
+<?php
+
+require('../controller/functions.php');
+
+if(isset($_POST['btn-login'])) {
+        if(Login($_POST) > 0) {
+            echo "
+            <script>
+                        alert('Login successfully !!');
+                        location.href = 'index.php';
+            </script>
+            ";
+        } else {
+            echo "
+            <script>
+                        alert('Signup fail !!');
+            </script>
+            ";
+        }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +77,7 @@
                     
                     <div class="btn-container">
                             
-                        <button type="submit" class="btn-cta btn-login">Log in</button>
+                        <button type="submit" class="btn-cta btn-login" name="btn-login">Log in</button>
                         
                     </div>
    
