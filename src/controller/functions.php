@@ -1,4 +1,5 @@
 <?php
+
 // Connection to database
 $conn = mysqli_connect("localhost","root","","bookmanagement");
 
@@ -202,6 +203,7 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
 
 
     function Login($userData) {
+       
         global $conn;
         $usernameLogin = $userData["username"];
         $passwordLogin = $userData["password"];
@@ -212,7 +214,9 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
         if(mysqli_num_rows($resultUsername) === 1) {
             $data = mysqli_fetch_assoc($resultUsername);
             if(password_verify($passwordLogin,$data['Password'])) {
-              header("Location: ../view/index.php");
+                session_start();
+                $_SESSION["username"] = $usernameLogin;
+                header("Location: ../view/index.php");
               exit;
             }
       

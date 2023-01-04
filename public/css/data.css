@@ -14,13 +14,43 @@
     padding: 20px;
     background-color: gold;
     color: black;
- }
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    top: 0;
+  }
+  header .left-content {
+    flex-basis: 90%;
+  }
+
+  header nav {
+    flex-basis: 10%;
+  }
+
+ header nav ul li {
+  list-style-type: none;
+  color: black;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: black;
+}
 
 
  #content {
     max-width: 800px;
     margin: 0 auto;
    margin-bottom: 20px;
+ }
+
+
+ #content .book-limit .data-book .left-content figure img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
  }
 
  /* css class */

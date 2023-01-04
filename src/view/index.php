@@ -1,6 +1,18 @@
 <?php 
 // Import another php file 
+    session_start();
+
+
+  
+
+    if(!isset($_SESSION["username"])){
+        // redirect
+        header("Location: login.php");
+        exit;
+
+    }
     require("../controller/functions.php");
+
     
     $books = QueryData("SELECT * FROM books ORDER BY ID DESC");
 
@@ -49,22 +61,43 @@
 <body>
 
     <header>
+        <section class="left-content">
         <h1>
             Book Management Web App
         </h1>
+        </section>
+
+       
+
+        <nav>
+            <ul>
+                <li>
+                <a href="logout.php">
+                <h1>    
+                Log out 
+                </h1>
+                </a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <main>
         <div id="content">
 
-    <section class="book-limit">
+        <?php if(isset($_SESSION["username"])) :?>
+            <p  style="margin-top:20px; text-align:center;"
+            >Welcome <?= $_SESSION["username"] ?></p>            
+        <?php endif; ?>
+
+        <section class="book-limit">
         <form action="" method="POST">
    
         <input type="text" name="search-form" class="form-input" autofocus autocomplete="off" placeholder="Looking for something??"> 
       
         <button type="submit" name="btn-search" class="btn-cta btn-search">search</button>
           
-    </form>
+        </form>
     <?php $i=1; ?>
     <?php foreach($books as $book) :?>
                 <section class="data-book">

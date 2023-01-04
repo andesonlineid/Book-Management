@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION["username"])) {
+    header("Location: ../../index.html");
+    exit;
+}
     require("../controller/functions.php");
 //  var_dump($_GET["ID"]);
 

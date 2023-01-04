@@ -1,4 +1,11 @@
 <?php
+
+session_start();
+    if(!isset($_SESSION["username"])) {
+        header("Location: ../../index.html");
+        exit;
+    }
+
             require("../controller/functions.php");
 
                 if( isset($_POST["btn-add-data"]) ) {
