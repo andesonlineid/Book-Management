@@ -10,14 +10,14 @@ body {
 }
 
 main #content {
-    width: 1440px;
+    max-width: 1440px;
     margin: 0px auto;
     padding: 20px;
 }
 
 /* css class */
 
-.main-header {
+body header {
     padding: 20px;
     font-size: 1.2em;
     font-weight: 700;
@@ -25,13 +25,11 @@ main #content {
     color: black;
 }
 
-.main-header h1 a {
+body header h1 a {
     text-decoration: none;
     color: black;
     font-weight: 700;
 }
-
-
 
 .add-data {
     margin-top: 20px;
@@ -40,8 +38,10 @@ main #content {
     border-radius: 5px; 
 }
 
-.add-data header {
+main #content .add-data h1,a {
     text-align: center;
+    text-decoration: none;
+    color: black;
 }
 
 
@@ -62,14 +62,17 @@ main #content {
     border: none;
     cursor: pointer;
 }
-.btn-add-data {
+.btn-add {
     background-color: rgb(12, 140, 12);
     color: white;
     font-weight: 700;
     width: 100%;
     margin-top: 20px;
+    border-radius: 5px;
+    transition: all 0.5s;
 }
 
-.btn-add-data:hover {
+.btn-add:hover {
     background-color: rgb(7, 101, 7);
+    border-radius: 25px;
 }

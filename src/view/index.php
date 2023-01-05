@@ -1,20 +1,15 @@
 <?php 
 // Import another php file 
     session_start();
-
-
-  
-
     if(!isset($_SESSION["username"])){
         // redirect
         header("Location: login.php");
         exit;
 
     }
-    require("../controller/functions.php");
 
-    
-    $books = QueryData("SELECT * FROM books ORDER BY ID DESC");
+    require("../controller/functions.php");
+    $books = QueryData("SELECT * FROM books ORDER BY id DESC");
 
     // Connect to DBMS
     // $servername = "localhost";
@@ -41,12 +36,8 @@
     
         if(isset($_POST["btn-search"]) ){
             $data = $_POST["search-form"];
-            $books = Search($data);
-           
-          
+            $books = Search($data); 
         }
-
-         
 ?>
 
 <!DOCTYPE html>
@@ -63,19 +54,17 @@
     <header>
         <section class="left-content">
         <h1>
-            Book Management Web App
+            Book management web app
         </h1>
         </section>
-
-       
 
         <nav>
             <ul>
                 <li>
                 <a href="logout.php">
-                <h1>    
-                Log out 
-                </h1>
+                <h4>    
+                  📤 out
+                </h4>
                 </a>
                 </li>
             </ul>
@@ -91,20 +80,20 @@
         <?php endif; ?>
 
         <section class="book-limit">
+
         <form action="" method="POST">
-   
-        <input type="text" name="search-form" class="form-input" autofocus autocomplete="off" placeholder="Looking for something??"> 
-      
-        <button type="submit" name="btn-search" class="btn-cta btn-search">search</button>
-          
+            <input type="text" name="search-form" class="form-search" autofocus autocomplete="off" placeholder="Looking for something??"> 
+            <button type="submit" name="btn-search" class="btn-cta btn-search">search</button>
         </form>
+
+
     <?php $i=1; ?>
     <?php foreach($books as $book) :?>
                 <section class="data-book">
 
                     <div class="left-content">
                             <figure>
-                                <img src="../../public/img/<?= $book["BookImage"] ?>" alt="<?= $book["BookTitle"] ?>">
+                                <img src="../../public/img/<?= $book["book_image"] ?>" alt="<?= $book["book_title"] ?>">
                             </figure>   
 
                     </div>
@@ -116,25 +105,25 @@
                                     No: <?= $i++ ?>
                                 </li>
                                 <li>
-                                    Title: <?= $book["BookTitle"] ?>
+                                    Title: <?= $book["book_title"] ?>
                                 </li>
                                 <li>
-                                    Author: <?= $book["BookAuthor"] ?>
+                                    Author: <?= $book["book_author"] ?>
                                 </li>
                                 <li>
-                                    Publisher: <?= $book["BookPublisher"] ?>
+                                    Publisher: <?= $book["book_publisher"] ?>
                                 </li>
                                 <li>
-                                    Price: <?= $book["BookPrice"] ?>
+                                    Price: <?= $book["book_price"] ?>
                                 </li>
                                 <li>
-                                    Isbn: <?= $book["BookIsbn"] ?>
+                                    Isbn: <?= $book["book_isbn"] ?>
                                 </li>
                                 <li>
-                                    <a href="../model/update.php?ID=<?= $book["ID"] ?>">
+                                    <a href="../model/update.php?ID=<?= $book["id"] ?>">
                                     <button class="btn-cta btn-update"> Update </button>
                                     </a>
-                                    <a href="../model/delete.php?ID=<?= $book["ID"] ?>">
+                                    <a href="../model/delete.php?ID=<?= $book["id"] ?>">
                                     <button class="btn-cta btn-delete"> delete </button>
                                     </a>
                                 </li>
@@ -146,7 +135,7 @@
 
         <?php endforeach; ?>
         <a href="../model/add.php">
-        <button type="submit" class="btn-cta btn-add-data">
+        <button type="submit" class="btn-cta btn-add">
             add data
          </button> 
          </a>  

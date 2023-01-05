@@ -25,7 +25,6 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
             $bookAuthor = htmlspecialchars($data["book-author"]);
             $bookPublisher = htmlspecialchars($data["book-publisher"]);
             $bookPrice = htmlspecialchars($data["book-price"]);
-           
             $bookIsbn = htmlspecialchars($data["book-isbn"]);  
             $bookImage = Upload();   
 
@@ -36,7 +35,7 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
 
             $sqlInsert = "INSERT INTO books VALUES (
                 '', '$bookTitle', '$bookAuthor', '$bookPublisher', 
-                '$bookPrice', '$bookImage' , '$bookIsbn'
+                '$bookPrice', '$bookIsbn' , '$bookImage'
                 ) 
                 ";
             // Insert data to DBMS
@@ -100,7 +99,7 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
     function DeleteData($id) {
 
         global $conn;
-        $sqlDelete = "DELETE FROM books WHERE ID = '$id'";
+        $sqlDelete = "DELETE FROM books WHERE id = '$id'";
         mysqli_query($conn, $sqlDelete);
         return mysqli_affected_rows($conn);
 
@@ -114,9 +113,8 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
         $bookAuthor = htmlspecialchars($newData["book-author"]);
         $bookPublisher = htmlspecialchars($newData["book-publisher"]);
         $bookPrice = htmlspecialchars($newData["book-price"]);
-        $oldImage =  htmlspecialchars($newData["old-image"]);
         $bookIsbn = htmlspecialchars($newData["book-isbn"]);
-
+        $oldImage =  htmlspecialchars($newData["old-image"]);
         // If users not upload new image
        if ($_FILES["file-upload"]["error"] === 4) {
             $bookImage = $oldImage;
@@ -124,10 +122,11 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
         $bookImage = Upload();
        }
 
-        $sqlUpdate = "UPDATE books SET BookTitle = '$bookTitle', BookAuthor= '$bookAuthor',
-        BookPublisher = '$bookPublisher', BookPrice= '$bookPrice', BookImage = '$bookImage',
-        BookIsbn = '$bookIsbn' 
-        WHERE ID = $id ";
+        $sqlUpdate = "UPDATE books SET book_title = '$bookTitle', book_author= '$bookAuthor',
+        book_publisher = '$bookPublisher', book_price= '$bookPrice',
+        book_isbn = '$bookIsbn',
+        book_image = '$bookImage' 
+        WHERE id = $id ";
 
         mysqli_query($conn,$sqlUpdate);
 
@@ -137,9 +136,9 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
 
     function Search($keyword){
       
-        $query = "SELECT * FROM books WHERE BookTitle LIKE '%$keyword%'
-        OR BookAuthor LIKE '%$keyword%' OR BookPublisher LIKE '%$keyword%'
-        OR BookIsbn LIKE '%$keyword%'";
+        $query = "SELECT * FROM books WHERE book_title LIKE '%$keyword%'
+        OR book_author LIKE '%$keyword%' OR book_publisher LIKE '%$keyword%'
+        OR book_isbn LIKE '%$keyword%'";
 
         return QueryData($query);
 
@@ -155,8 +154,8 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
         $userPassword = mysqli_real_escape_string($conn, $datauser["password"]);
         $userConfirmPassword = mysqli_real_escape_string($conn, $datauser["confirm-password"]);
 
-        $resultEmailDatabase = mysqli_query($conn,"SELECT Email FROM user WHERE Email = '$userEmail'");
-        $resultUsernameDatabase = mysqli_query($conn,"SELECT Username FROM user WHERE Username = '$userName'");
+        $resultEmailDatabase = mysqli_query($conn,"SELECT email FROM users WHERE email = '$userEmail'");
+        $resultUsernameDatabase = mysqli_query($conn,"SELECT username FROM users WHERE username = '$userName'");
         
 
         if(mysqli_fetch_assoc($resultEmailDatabase)) {
@@ -192,7 +191,7 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
 
         $hashPassword = password_hash($userPassword,PASSWORD_BCRYPT);
         
-        $insertUserData = "INSERT INTO user VALUES (
+        $insertUserData = "INSERT INTO users VALUES (
             '','$userEmail','$userName','$hashPassword'
             )";
 
@@ -208,12 +207,12 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
         $usernameLogin = $userData["username"];
         $passwordLogin = $userData["password"];
        
-        $resultUsername = mysqli_query($conn,"SELECT * FROM user
-         WHERE Username = '$usernameLogin'");
+        $resultUsername = mysqli_query($conn,"SELECT * FROM users
+         WHERE username = '$usernameLogin'");
 
         if(mysqli_num_rows($resultUsername) === 1) {
             $data = mysqli_fetch_assoc($resultUsername);
-            if(password_verify($passwordLogin,$data['Password'])) {
+            if(password_verify($passwordLogin,$data['password'])) {
                 session_start();
                 $_SESSION["username"] = $usernameLogin;
                 header("Location: ../view/index.php");

@@ -62,19 +62,19 @@
                 </header>
                 <form action="" method="POST">
                     <div>
-                    <input type="text" name="email" placeholder="Input your email" class="form-input" required>
+                    <input type="text" name="email" placeholder="Input your email"  autocomplete="off" class="form-input" required>
                     </div>
 
                     <div>
-                    <input type="text" name="username" placeholder="Input your username" class="form-input" required>
+                    <input type="text" name="username" placeholder="Input your username" class="form-input" autocomplete="off" required>
                     </div>
 
                     <div>
-                    <input type="password" name="password" placeholder="Input your password" class="form-input" required>
+                    <input type="password" name="password" placeholder="Input your password" class="form-input" autocomplete="off" required>
                     </div>
 
                     <div>
-                    <input type="password" name="confirm-password" placeholder="password confirmation" class="form-input" required>
+                    <input type="password" name="confirm-password" placeholder="password confirmation" class="form-input" autocomplete="off" required>
                     </div>
 
                     <div>

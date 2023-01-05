@@ -43,9 +43,9 @@ session_start();
 
         <section class="add-data">
 
-                    <header>
-                        <h1>Add Data</h1>
-                    </header>
+                 
+                        <h1><a href="../view/index.php">🏡</a></h1>
+                
 
 
                         <form action="" method="post" enctype="multipart/form-data">
@@ -74,7 +74,7 @@ session_start();
                                 <input type="text" class="input-form" name="book-isbn" placeholder="Input book isbn" required>
                                 </li>
                             </ul>
-                                <button name="btn-add-data" class="btn-add-data btn-cta">add data</button>
+                                <button name="btn-add-data" class="btn-add btn-cta">add data</button>
                         </form>
                
         </section>

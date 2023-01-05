@@ -87,9 +87,11 @@ main #content .container-login .right-content .btn-container .btn-login {
     color: white;
     cursor: pointer;
     border-radius: 5px;
+    transition: all 0.5s;
 }
 .container-login .right-content .btn-container .btn-cta:hover {
     background-color: rgb(1, 123, 1);
+    border-radius: 25px;
 }
 
 
