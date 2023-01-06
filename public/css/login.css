@@ -68,6 +68,12 @@ main #content {
 
 }
 
+.container-login .right-content form ul li .form-checkbox {
+    padding: 10px;
+    cursor: pointer;
+}
+
+
 main #content .container-login .right-content .btn-container {
     margin-top: 20px;
     text-align: center;

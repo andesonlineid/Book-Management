@@ -1,12 +1,16 @@
 <?php 
 // Import another php file 
     session_start();
+
     if(!isset($_SESSION["username"])){
         // redirect
         header("Location: login.php");
         exit;
 
     }
+
+
+
 
     require("../controller/functions.php");
     $books = QueryData("SELECT * FROM books ORDER BY id DESC");

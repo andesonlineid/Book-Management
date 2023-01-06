@@ -206,7 +206,7 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
         global $conn;
         $usernameLogin = $userData["username"];
         $passwordLogin = $userData["password"];
-       
+        $rememberMe = $userData["remember"];
         $resultUsername = mysqli_query($conn,"SELECT * FROM users
          WHERE username = '$usernameLogin'");
 
@@ -215,8 +215,16 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
             if(password_verify($passwordLogin,$data['password'])) {
                 session_start();
                 $_SESSION["username"] = $usernameLogin;
-                header("Location: ../view/index.php");
-              exit;
+                
+                // if remember box clicked then
+                if(isset($rememberMe)) {
+                    setcookie("id",$data['id'],time() +60*60);
+                    $hashRemember = hash('sha256',$data["username"]);
+                    setcookie("key","$hashRemember",time()+60*60);
+                }      
+            
+                    header("Location: ../view/index.php");
+                    exit;    
             }
       
         }  

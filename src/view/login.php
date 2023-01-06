@@ -1,14 +1,28 @@
 <?php
 session_start();
 
+require('../controller/functions.php');
+
+
+if(isset($_COOKIE["id"]) && isset($_COOKIE["key"])) {
+    $id = $_COOKIE["id"];
+    $key = $_COOKIE["key"];
+    $result = mysqli_query($conn,"SELECT username FROM 
+    users WHERE id = $id ");
+    $data = mysqli_fetch_assoc($result);
+
+    if( $key === hash("sha256",$data["username"])) {
+            $_SESSION["username"] = $data["username"];
+        } 
+}
+
+
 if(isset($_SESSION["username"])) {
     header("Location: index.php");
     exit;
 }
 
 
-
-require('../controller/functions.php');
 
 if(isset($_POST['btn-login'])) {
         if(!Login($_POST)) {
@@ -70,7 +84,7 @@ if(isset($_POST['btn-login'])) {
                                 </li>
                                 
                                 <li>
-                                    <input type="checkbox" name="remember" id="remember"> <label for="remember">remember me</label>
+                                    <input type="checkbox" name="remember" class="form-checkbox" id="remember"> <label for="remember">remember me</label>
                                 </li>                           
                             </ul>
 
