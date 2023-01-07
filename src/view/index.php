@@ -6,14 +6,11 @@
         // redirect
         header("Location: login.php");
         exit;
-
     }
 
-
-
-
     require("../controller/functions.php");
-    $books = QueryData("SELECT * FROM books ORDER BY id DESC");
+    $totalData = count(QueryData("SELECT * FROM books ORDER BY id ASC"));
+    // $books = QueryData("SELECT * FROM books ORDER BY id ASC");
 
     // Connect to DBMS
     // $servername = "localhost";
@@ -38,10 +35,21 @@
     // fetch data from table
     // $books = mysqli_fetch_assoc($result); // return array
     
+        $dataPage = 2;
+
         if(isset($_POST["btn-search"]) ){
             $data = $_POST["search-form"];
             $books = Search($data); 
         }
+
+        if(isset($_GET["page"])) {
+            $data = $_GET["page"]; 
+        } else {
+            $data = 0;
+        }
+        
+        $books = QueryData("SELECT * FROM books ORDER BY id ASC LIMIT $data ,$dataPage ");
+      
 ?>
 
 <!DOCTYPE html>
@@ -106,7 +114,10 @@
                             <ul>
                               
                                 <li>
-                                    No: <?= $i++ ?>
+                                    No: 
+                              
+                                    <?= $i+$data++; ?>
+                             
                                 </li>
                                 <li>
                                     Title: <?= $book["book_title"] ?>
@@ -136,8 +147,28 @@
                 
 
                 </section>
-
+    
         <?php endforeach; ?>
+
+
+            <!-- Pagination -->
+        <?php $j=1; ?>
+        <section class="pagination">
+                <?php for($i=0; $i < $totalData; $i++): ?>
+                <?php if($i % 2 === 0) :?> 
+                    <h4>
+                    <a href="index.php?page=<?= $i; ?>">
+                    <?= $j++;?>
+                    </a>
+                </h4>
+               
+     
+        <?php endif; ?>
+        <?php endfor; ?>
+        </section>
+       
+            <!--  -->
+
         <a href="../model/add.php">
         <button type="submit" class="btn-cta btn-add">
             add data

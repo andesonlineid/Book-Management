@@ -148,6 +148,30 @@ main #content .book-limit a .btn-add {
 /* Last button */
 
 
+/* Pagination */
+main #content .book-limit .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+ 
+}
+
+
+main #content .book-limit .pagination h4 a {
+  text-decoration: none;
+  color: black;
+  margin-right: 15px;
+  transition: all 0.4s;
+}
+
+main #content .book-limit .pagination h4 a:hover {
+  cursor: pointer;
+  color: rgb(206, 15, 15);
+}
+/* Last pagination */
+
+
 
 /* Responsive breakpoints */
 @media screen and (max-width: 780px) {

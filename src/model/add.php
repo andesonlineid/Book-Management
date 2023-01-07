@@ -8,8 +8,7 @@ session_start();
 
             require("../controller/functions.php");
 
-                if( isset($_POST["btn-add-data"]) ) {
-                      
+                if( isset($_POST["btn-add-data"]) ) {  
                 //  pass by array value
                     if(addDataFunct($_POST) > 0) {
                         // Using javascript to redirect webpage to another

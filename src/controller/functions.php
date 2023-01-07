@@ -34,14 +34,14 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
             }              
 
             $sqlInsert = "INSERT INTO books VALUES (
-                '', '$bookTitle', '$bookAuthor', '$bookPublisher', 
+               '', '$bookTitle', '$bookAuthor', '$bookPublisher', 
                 '$bookPrice', '$bookIsbn' , '$bookImage'
                 ) 
                 ";
             // Insert data to DBMS
             mysqli_query($conn,$sqlInsert);
 
-            return (mysqli_affected_rows($conn));
+            return mysqli_affected_rows($conn);
             
     }
 
@@ -232,5 +232,7 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
 
 
     }
+
+   
 
 ?>
