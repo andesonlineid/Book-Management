@@ -158,17 +158,14 @@ main #content .book-limit .pagination {
 }
 
 
-main #content .book-limit .pagination h4 a {
+main #content .book-limit .pagination a,main #content .book-limit .pagination p a  {
   text-decoration: none;
-  color: black;
-  margin-right: 15px;
+  color: white;
+  margin-left: 15px;
   transition: all 0.4s;
 }
 
-main #content .book-limit .pagination h4 a:hover {
-  cursor: pointer;
-  color: rgb(206, 15, 15);
-}
+
 /* Last pagination */
 
 

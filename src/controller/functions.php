@@ -206,7 +206,7 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
         global $conn;
         $usernameLogin = $userData["username"];
         $passwordLogin = $userData["password"];
-        $rememberMe = $userData["remember"];
+       
         $resultUsername = mysqli_query($conn,"SELECT * FROM users
          WHERE username = '$usernameLogin'");
 
@@ -217,7 +217,7 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
                 $_SESSION["username"] = $usernameLogin;
                 
                 // if remember box clicked then
-                if(isset($rememberMe)) {
+                if(isset($userData["remember"])) {
                     setcookie("id",$data['id'],time() +60*60);
                     $hashRemember = hash('sha256',$data["username"]);
                     setcookie("key","$hashRemember",time()+60*60);

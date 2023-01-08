@@ -9,7 +9,7 @@
     }
 
     require("../controller/functions.php");
-    $totalData = count(QueryData("SELECT * FROM books ORDER BY id ASC"));
+   
     // $books = QueryData("SELECT * FROM books ORDER BY id ASC");
 
     // Connect to DBMS
@@ -35,7 +35,12 @@
     // fetch data from table
     // $books = mysqli_fetch_assoc($result); // return array
     
-        $dataPage = 2;
+    // Cara from tutorial web programming unpas pagination
+    $dataPage = 2;
+    $totalData = count(QueryData("SELECT * FROM books"));
+    $pages = ceil($totalData / $dataPage);
+   
+
 
         if(isset($_POST["btn-search"]) ){
             $data = $_POST["search-form"];
@@ -43,12 +48,13 @@
         }
 
         if(isset($_GET["page"])) {
-            $data = $_GET["page"]; 
+            $pageClicked = $_GET["page"];
         } else {
-            $data = 0;
+            $pageClicked = 1;
         }
-        
-        $books = QueryData("SELECT * FROM books ORDER BY id ASC LIMIT $data ,$dataPage ");
+
+        $firstData = ($pageClicked * $dataPage) - $dataPage;
+        $books = QueryData("SELECT * FROM books ORDER BY id ASC LIMIT $firstData , $dataPage ");
       
 ?>
 
@@ -116,7 +122,7 @@
                                 <li>
                                     No: 
                               
-                                    <?= $i+$data++; ?>
+                                    <?= $i + $firstData++; ?>
                              
                                 </li>
                                 <li>
@@ -152,22 +158,46 @@
 
 
             <!-- Pagination -->
-        <?php $j=1; ?>
+    
         <section class="pagination">
-                <?php for($i=0; $i < $totalData; $i++): ?>
-                <?php if($i % 2 === 0) :?> 
-                    <h4>
-                    <a href="index.php?page=<?= $i; ?>">
-                    <?= $j++;?>
-                    </a>
-                </h4>
-               
-     
+
+        <?php if($pageClicked != 1) :?>
+            <a href="index.php?page=<?= $pageClicked-1; ?>">
+                        <
+            </a>
         <?php endif; ?>
-        <?php endfor; ?>
+       
+
+            <?php for($i=1; $i <= $pages; $i++) : ?>
+                <?php if($i == $pageClicked) : ?>
+                    <p style="font-weight:bold">
+                    <a href="index.php?page=<?= $i; ?>" >
+                        <?= $i?>
+                    </a>
+                </p>
+                
+                <?php else : ?>
+                
+                <p>
+                    <a href="index.php?page=<?= $i; ?>" >
+                    <?= $i?>
+                     </a>
+                </p>
+
+                <?php endif; ?>
+            <?php endfor; ?>
+
+
+            <!-- arrow > -->
+        <?php if($pageClicked != $pages) :?>
+            <a href="index.php?page=<?= $pageClicked+1; ?>">
+                        >
+                    </a>
+
+        <?php endif; ?>
         </section>
        
-            <!--  -->
+            <!-- last pagination  -->
 
         <a href="../model/add.php">
         <button type="submit" class="btn-cta btn-add">
@@ -176,11 +206,6 @@
          </a>  
         
     </section>
-
-     
-       
-     
-
         </div>
     </main>
     
