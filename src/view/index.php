@@ -43,6 +43,9 @@
  
        
         if(isset($_POST["btn-search"]) ){
+
+
+            $pageClicked = 1;
           
             $data = $_POST["search-form"];
             // Saved search data 
@@ -56,12 +59,12 @@
            
             $pages = ceil($totalData / $dataPage);  
             
-            $pageClicked = 1;
+         
             $firstData = ($pageClicked * $dataPage) - $dataPage;
           
             $books = Search($data,$firstData,$dataPage);
-      
-        } else {
+
+        }  else {
             $pageClicked = 1;
             $firstData = ($pageClicked * $dataPage) - $dataPage;
             $books = QueryData("SELECT * FROM books ORDER BY id LIMIT $firstData, $dataPage");
@@ -93,13 +96,8 @@
 
             }
           
-        }  else {
-            $pageClicked = 1;
-            $firstData = ($pageClicked * $dataPage) - $dataPage;
-        }
-          
-         
-
+        }  
+    
 ?>
 
 <!DOCTYPE html>
@@ -143,7 +141,7 @@
 
         <section class="book-limit">
 
-        <form action="" method="POST">
+        <form action="index.php" method="POST">
             <input type="text" name="search-form" class="form-search" autofocus autocomplete="off" placeholder="Looking for something??"> 
             <button type="submit" name="btn-search" class="btn-cta btn-search">search</button>
         </form>
@@ -213,14 +211,11 @@
             </a>
         <?php endif; ?>
             
-
-      <?php if(isset($_POST["btn-search"])) : ?>
-        
-            <?php for($i; $i <= $pages; $i++) : ?>
+            <?php for($i=1; $i <= $pages; $i++) : ?>
             
                 <?php if($i == $pageClicked) : ?>
                     <p style="font-weight:bold">
-                    <a href="index.php?page=<?= $i; ?>" >
+                    <a href="index.php?page=<?= $i;; ?>" >
                         <?= $i?>
                     </a>
                 </p>
@@ -234,28 +229,6 @@
 
                 <?php endif; ?>
                 <?php endfor; ?>
-
-        <?php else: ?>
-
-                    <?php for($i=1; $i <= $pages; $i++) : ?>
-                <?php if($i == $pageClicked) : ?>
-                    <p style="font-weight:bold">
-                    <a href="index.php?page=<?= $i; ?>" >
-                        <?= $i?>
-                    </a>
-                </p>
-    
-                <?php else : ?>
-                <p>
-                    <a href="index.php?page=<?= $i; ?>" >
-                    <?= $i;?>
-                     </a>
-                </p>
-
-                <?php endif; ?>
-            <?php endfor; ?>
-
-        <?php endif; ?>
 
             <!-- arrow > -->
         <?php if($pageClicked != $pages) :?>
