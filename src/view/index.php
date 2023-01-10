@@ -10,6 +10,7 @@
 
     require("../controller/functions.php");
    
+   
     // $books = QueryData("SELECT * FROM books ORDER BY id ASC");
 
     // Connect to DBMS
@@ -38,24 +39,67 @@
     // Cara from tutorial web programming unpas pagination
     $dataPage = 2;
     $totalData = count(QueryData("SELECT * FROM books"));
-    $pages = ceil($totalData / $dataPage);
-   
-
-
+    $pages = ceil($totalData / $dataPage);  
+ 
+       
         if(isset($_POST["btn-search"]) ){
+          
             $data = $_POST["search-form"];
-            $books = Search($data); 
-        }
+            // Saved search data 
+            $_SESSION["data-saved"] = $data;
 
-        if(isset($_GET["page"])) {
-            $pageClicked = $_GET["page"];
+            $query = "SELECT * FROM books WHERE book_title LIKE '%$data%'
+            OR book_author LIKE '%$data%' OR book_publisher LIKE '%$data%'
+            OR book_isbn LIKE '%$data%'";
+
+            $totalData = count(QueryData($query));
+           
+            $pages = ceil($totalData / $dataPage);  
+            
+            $pageClicked = 1;
+            $firstData = ($pageClicked * $dataPage) - $dataPage;
+          
+            $books = Search($data,$firstData,$dataPage);
+      
         } else {
             $pageClicked = 1;
+            $firstData = ($pageClicked * $dataPage) - $dataPage;
+            $books = QueryData("SELECT * FROM books ORDER BY id LIMIT $firstData, $dataPage");
         }
-
-        $firstData = ($pageClicked * $dataPage) - $dataPage;
-        $books = QueryData("SELECT * FROM books ORDER BY id ASC LIMIT $firstData , $dataPage ");
+        
       
+
+        if(isset($_GET["page"])) {
+          
+            if(!isset($_SESSION["data-saved"])) {
+              
+                $pageClicked = 1;
+                $firstData = ($pageClicked * $dataPage) - $dataPage;
+                $books = QueryData("SELECT * FROM books ORDER BY id ASC LIMIT $firstData , $dataPage ");
+           
+            } else {
+               $dataSaved =  $_SESSION["data-saved"];
+            
+                $query = "SELECT * FROM books WHERE book_title LIKE '%$dataSaved%'
+                OR book_author LIKE '%$dataSaved%' OR book_publisher LIKE '%$dataSaved%'
+                OR book_isbn LIKE '%$dataSaved%'";
+    
+                $totalData = count(QueryData($query));
+                $pages = ceil($totalData / $dataPage);  
+                $pageClicked = $_GET["page"];
+    
+                $firstData = ($pageClicked * $dataPage) - $dataPage;
+                $books = Search($dataSaved,$firstData,$dataPage);
+
+            }
+          
+        }  else {
+            $pageClicked = 1;
+            $firstData = ($pageClicked * $dataPage) - $dataPage;
+        }
+          
+         
+
 ?>
 
 <!DOCTYPE html>
@@ -104,6 +148,8 @@
             <button type="submit" name="btn-search" class="btn-cta btn-search">search</button>
         </form>
 
+
+ 
 
     <?php $i=1; ?>
     <?php foreach($books as $book) :?>
@@ -166,27 +212,50 @@
                         <
             </a>
         <?php endif; ?>
-       
+            
 
-            <?php for($i=1; $i <= $pages; $i++) : ?>
+      <?php if(isset($_POST["btn-search"])) : ?>
+        
+            <?php for($i; $i <= $pages; $i++) : ?>
+            
                 <?php if($i == $pageClicked) : ?>
                     <p style="font-weight:bold">
                     <a href="index.php?page=<?= $i; ?>" >
                         <?= $i?>
                     </a>
                 </p>
-                
+    
                 <?php else : ?>
-                
                 <p>
                     <a href="index.php?page=<?= $i; ?>" >
-                    <?= $i?>
+                    <?= $i;?>
+                     </a>
+                </p>
+
+                <?php endif; ?>
+                <?php endfor; ?>
+
+        <?php else: ?>
+
+                    <?php for($i=1; $i <= $pages; $i++) : ?>
+                <?php if($i == $pageClicked) : ?>
+                    <p style="font-weight:bold">
+                    <a href="index.php?page=<?= $i; ?>" >
+                        <?= $i?>
+                    </a>
+                </p>
+    
+                <?php else : ?>
+                <p>
+                    <a href="index.php?page=<?= $i; ?>" >
+                    <?= $i;?>
                      </a>
                 </p>
 
                 <?php endif; ?>
             <?php endfor; ?>
 
+        <?php endif; ?>
 
             <!-- arrow > -->
         <?php if($pageClicked != $pages) :?>

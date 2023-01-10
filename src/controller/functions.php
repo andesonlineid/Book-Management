@@ -8,12 +8,13 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
         global $conn;
         // Show what's inside the table
         $result =  mysqli_query($conn,$sqlQuery);
+       
         $datasTable = [];
         // Fetch data in assoc array form
         while($data = mysqli_fetch_assoc($result) ) {
             $datasTable[] = $data;
         }
-
+      
         return $datasTable;
     }
 
@@ -134,11 +135,11 @@ $conn = mysqli_connect("localhost","root","","bookmanagement");
     
     }
 
-    function Search($keyword){
+    function Search($keyword,$firstData,$dataPage){
       
         $query = "SELECT * FROM books WHERE book_title LIKE '%$keyword%'
         OR book_author LIKE '%$keyword%' OR book_publisher LIKE '%$keyword%'
-        OR book_isbn LIKE '%$keyword%'";
+        OR book_isbn LIKE '%$keyword%' LIMIT $firstData, $dataPage";
 
         return QueryData($query);
 
